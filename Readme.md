@@ -1,2 +1,2 @@
 # list of Project 
-* [Dectinary](../master/Practies/1)
+* [Dectinary](https://github.com/zeoses/DaClass/tree/master/Practices/1)
