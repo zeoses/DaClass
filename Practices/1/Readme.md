@@ -2,7 +2,7 @@
 
 This project is a simple dictinary for Django class .
 
-In this code I use the X library for graphics work. One of the reasons for [this](https://dev.to/amigosmaker/python-gui-pyqt-vs-tkinter-5hdd) choice is written here.
+In this code I use the Qt library for graphics work. One of the reasons for [this](https://dev.to/amigosmaker/python-gui-pyqt-vs-tkinter-5hdd) choice is written here.
 
 ## Useful Link
 * [Qt Doc](https://doc.qt.io/qtforpython/contents.html)
