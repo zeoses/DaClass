@@ -9,5 +9,5 @@ In this code I use the Qt library for graphics work. One of the reasons for [thi
 * [Data](https://ankiweb.net/shared/info/923089455)
 
 ## How to run
-go to DaClass directory in terminal and run `pip install -r requirements.txt` so  `cd Practices/1` and run `python GSD.py` write your world and press Enter or click search button.
+go to DaClass directory in terminal and run `pip install -r requirements.txt` so  `cd Practices/1` and run `python GSD.py` write your word and press Enter or click search button.
 
