@@ -1,2 +1,2 @@
 # list of Project 
-* [Dectinary](tree/master/Practies/1)
+* [Dectinary](../blob/master/Practies/1)
