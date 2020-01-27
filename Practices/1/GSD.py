@@ -49,7 +49,7 @@ class MyWidget(QtWidgets.QWidget):
         keySearch = self.edit.text()   
         machResult = df[df[0].str.match(keySearch)]
         lenof = str(len(machResult))
-        self.coutLabe.setText('Result :' + lenof)
+        self.coutLabe.setText('Result : ' + lenof)
         if lenof == 0:
             self.result.setPlainText("")
         else:
