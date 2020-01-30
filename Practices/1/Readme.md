@@ -9,5 +9,8 @@ In this code I use the Qt library for graphics work. One of the reasons for [thi
 * [Data](https://ankiweb.net/shared/info/923089455)
 
 ## How to run
-go to DaClass directory in terminal and run `pip install -r requirements.txt` so  `cd Practices/1` and run `python GSD.py` write your word and press Enter or click search button.
+run `python GSD.py` write your word and press Enter or click search button.
 
+### Important packages used 
+* pandas : For data handling
+* PySide2 : core of Qt (for GUI handling)
