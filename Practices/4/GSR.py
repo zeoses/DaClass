@@ -42,7 +42,11 @@ class NewStdWindow(parent):
         
 
     def Base_UI(self):
-        self.init_ui("New Insert Studet")
+        if self.ID ==-1:
+            self.init_ui("New Insert Studet")
+        else:
+            self.init_ui("Edit Studet")
+
         self.lblID = QtWidgets.QLabel()
         self.lblID.setText('ID : ' )
         self.lblID.setStyleSheet("font-size: 12px;")
@@ -272,13 +276,34 @@ class EditWindow(parent):
             if len(lstStudent)>= int(ID):
                 self.newStd = NewStdWindow(ID)
                 self.newStd.setFixedSize(600, 300)
+                self.newStd.center()
                 self.newStd.show()
+
+            else :
+                mb = QtWidgets.QMessageBox()
+                #mb.setIcon(mb.Icon.Error)
+                mb.setText("{0}".format('Not exist this ID'))
+                mb.setWindowTitle("Error")
+                mb.exec_() 
         except :
             mb = QtWidgets.QMessageBox()
             #mb.setIcon(mb.Icon.Error)
-            mb.setText("{0}".format('Not exist this ID'))
+            mb.setText("{0}".format('ID is a number '))
             mb.setWindowTitle("Error")
             mb.exec_() 
+
+class ReportWindow(parent): 
+    def __init__(self):
+        studentCont = len(lstStudent)
+
+
+        self.g
+
+
+
+class ExportWindow(parent):
+    def __init__(self):
+        pass
 
 
 class MainWindow(parent):
@@ -306,18 +331,18 @@ class MainWindow(parent):
         self.btnViewStd.setIconSize(QtCore.QSize(120, 120))
         self.btnViewStd.clicked.connect(self.EditViewStd)
 
-        self.btnInsertCourseScore = QtWidgets.QPushButton("  Export Data")
-        self.btnInsertCourseScore.setIcon(QtGui.QPixmap('media/study.png'))
-        self.btnInsertCourseScore.setIconSize(QtCore.QSize(120, 120))
+        # self.btnInsertCourseScore = QtWidgets.QPushButton("  Export Data")
+        # self.btnInsertCourseScore.setIcon(QtGui.QPixmap('media/study.png'))
+        # self.btnInsertCourseScore.setIconSize(QtCore.QSize(120, 120))
 
-        self.btnRepo = QtWidgets.QPushButton("  Report")
-        self.btnRepo.setIcon(QtGui.QPixmap('media/maths.png'))
-        self.btnRepo.setIconSize(QtCore.QSize(120, 120))
+        # self.btnRepo = QtWidgets.QPushButton("  Report")
+        # self.btnRepo.setIcon(QtGui.QPixmap('media/maths.png'))
+        # self.btnRepo.setIconSize(QtCore.QSize(120, 120))
 
         self.grid.addWidget(self.btnNew, 1, 0)
         self.grid.addWidget(self.btnViewStd, 1, 1)
-        self.grid.addWidget(self.btnInsertCourseScore, 2, 1)
-        self.grid.addWidget(self.btnRepo, 2, 0)
+        # self.grid.addWidget(self.btnInsertCourseScore, 2, 1)
+        # self.grid.addWidget(self.btnRepo, 2, 0)
         self.setLayout(self.grid)
 
         
@@ -327,12 +352,26 @@ class MainWindow(parent):
         #self.hide()
         self.newStd = NewStdWindow()
         self.newStd.setFixedSize(600, 300)
+        self.newStd.center()
         self.newStd.show()
 
     def EditViewStd(self):
         self.editStd = EditWindow()
         self.editStd.setFixedSize(600, 300)
+        self.editStd.center()
         self.editStd.show()
+
+    def RepotWindo(self):
+        self.repoWindow = ReportWindow()
+        self.repoWindow.setFixedSize(200, 200)
+        self.repoWindow.center()
+        self.repoWindow.show()
+    
+    def ExportWindow(self):
+        self.exportWindow = ExportWindow()
+        self.exportWindow.setFixedSize(200, 200)
+        self.exportWindow.center()
+        self.exportWindow.show()
 
 
 if __name__ == "__main__":
