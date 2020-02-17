@@ -1,8 +1,8 @@
 # list of Practices 
 * [Dectinary](https://github.com/zeoses/DaClass/tree/master/Practices/1)
 * [Student Rate](https://github.com/zeoses/DaClass/tree/master/Practices/2)
-
 * [Matrix Simple Opreation (MSO)](https://github.com/zeoses/DaClass/tree/master/Practices/3)
+* [GUI Student Report (GSR)](https://github.com/zeoses/DaClass/tree/master/Practices/4)
 
 # Class Working
 * [third session](https://github.com/zeoses/DaClass/tree/master/ClassWork/3)
