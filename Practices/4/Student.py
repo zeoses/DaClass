@@ -1,7 +1,7 @@
 class Student :
-    def __init__(self, name, family, grade, math, scince, alghebra, computer):
+    def __init__(self,id, name, family, grade, math, scince, alghebra, computer):
         
-        # self.id = id
+        self.id = id
         self.name = name
         self.family = family
         self.grade = grade

@@ -33,10 +33,13 @@ class parent(QtWidgets.QWidget):
 
 class NewStdWindow(parent):
 
-    def __init__(self, id=0):
+    
+    def __init__(self, ID=0):
         super().__init__()
+        self.ID = int(ID) - 1
         self.Base_UI()
-        self.ID = id
+        
+        
 
     def Base_UI(self):
         self.init_ui("New Insert Studet")
@@ -45,7 +48,8 @@ class NewStdWindow(parent):
         self.lblID.setStyleSheet("font-size: 12px;")
 
         self.ledID = QtWidgets.QSpinBox()
-        self.ledID.setValue(len(lstStudent) +1)
+        if self.ID == - 1:
+            self.ledID.setValue(len(lstStudent) +1)
         self.ledID.setReadOnly(True)
         
         
@@ -159,34 +163,54 @@ class NewStdWindow(parent):
 
         self.setLayout(self.grdStd)
 
-        if id!= 0:
-            pass
+        if self.ID != -1:
+            self.ledID.setValue(int(lstStudent[self.ID].id))
+            self.ledName.setText(lstStudent[self.ID].name)
+            self.ledFamily.setText(lstStudent[self.ID].family)
+            self.ledGrad.setText(lstStudent[self.ID].grade)
+
+            self.ledAlghebra.setValue(lstStudent[self.ID].alghebra)
+            self.ledComputer.setValue(lstStudent[self.ID].computer)
+            self.ledMath.setValue(lstStudent[self.ID].math)
+            self.ledScince.setValue(lstStudent[self.ID].scince)
 
 
     def SaveStd(self):
 
-        #id = self.ledID.text()
-        name = self.ledName.text() 
-        family = self.ledFamily.text()
-        grade = self.ledGrad.text()
+        if self.ID == -1 :
+            id = int(self.ledID.text())
+            name = self.ledName.text() 
+            family = self.ledFamily.text()
+            grade = self.ledGrad.text()
 
-        math = float(self.ledMath.text())
-        algebra = float(self.ledAlghebra.text())
-        scince = float(self.ledScince.text())
-        computer = float(self.ledComputer.text())
-        std = Student.Student(name, family, grade, math, algebra, scince,computer)
-        
-        
-        # reply = QtGui.QMessageBox.ok .question(self, 'Save Message',
-        #     "New student succussfuly insert.", QtGui.QMessageBox.Yes | 
-        #     QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+            math = float(self.ledMath.text())
+            algebra = float(self.ledAlghebra.text())
+            scince = float(self.ledScince.text())
+            computer = float(self.ledComputer.text())
+            std = Student.Student(id, name, family, grade, math, algebra, scince,computer)
+            
+            
+            # reply = QtGui.QMessageBox.ok .question(self, 'Save Message',
+            #     "New student succussfuly insert.", QtGui.QMessageBox.Yes | 
+            #     QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 
-        # if reply == QtGui.QMessageBox.Yes:
-        #     event.accept()
-        # else:
-        #     event.ignore()   
+            # if reply == QtGui.QMessageBox.Yes:
+            #     event.accept()
+            # else:
+            #     event.ignore()   
 
-        lstStudent.append(std)
+            lstStudent.append(std)
+
+        else :
+            lstStudent[self.ID].name = self.ledName.text()
+            lstStudent[self.ID].family = self.ledFamily.text()
+            lstStudent[self.ID].grade = self.ledGrad.text()
+
+            lstStudent[self.ID].alghebra = self.ledAlghebra.text()
+            lstStudent[self.ID].computer = self.ledComputer.text()
+            lstStudent[self.ID].scince = self.ledScince.text()
+            lstStudent[self.ID].math = self.ledMath.text()
+            
         
 
         self.close()
@@ -235,13 +259,16 @@ class EditWindow(parent):
 
         self.setLayout(self.grid)
 
-        dictoFstudent = [vars(a) for a in lst]
-        df = pd.DataFrame(lstStudent)
-        self.result.setPlainText(df.to_string())
+        dictoFstudent = [list(vars(a).values()) for a in lstStudent]
+        
+        df = pd.DataFrame(dictoFstudent, index= None)
+        self.result.setPlainText(str(df.to_numpy()))
+
+
     def magic(self):
         ID = self.edit.text()
 
-        if len(lstStudent)>= ID:
+        if len(lstStudent)>= int(ID):
             self.newStd = NewStdWindow(ID)
             self.newStd.setFixedSize(600, 300)
             self.newStd.show()
