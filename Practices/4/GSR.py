@@ -266,12 +266,19 @@ class EditWindow(parent):
 
 
     def magic(self):
-        ID = self.edit.text()
+        try :
+            ID = self.edit.text()
 
-        if len(lstStudent)>= int(ID):
-            self.newStd = NewStdWindow(ID)
-            self.newStd.setFixedSize(600, 300)
-            self.newStd.show()
+            if len(lstStudent)>= int(ID):
+                self.newStd = NewStdWindow(ID)
+                self.newStd.setFixedSize(600, 300)
+                self.newStd.show()
+        except :
+            mb = QtWidgets.QMessageBox()
+            #mb.setIcon(mb.Icon.Error)
+            mb.setText("{0}".format('Not exist this ID'))
+            mb.setWindowTitle("Error")
+            mb.exec_() 
 
 
 class MainWindow(parent):
