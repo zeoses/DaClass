@@ -3,6 +3,7 @@ from PySide2 import QtCore, QtWidgets, QtGui
 import sys
 import Student
 import pandas as pd
+import os
 
 
 global lstStudent
@@ -292,18 +293,115 @@ class EditWindow(parent):
             mb.setWindowTitle("Error")
             mb.exec_() 
 
-class ReportWindow(parent): 
+class ReportWindow(parent):
+
     def __init__(self):
+        super().__init__()
+
+        dictoFstudent = [list(vars(a).values()) for a in lstStudent]
+        df = pd.DataFrame(dictoFstudent)
+        # print(df)
         studentCont = len(lstStudent)
+        print(df.head(10))
+        self.lblMath = QtWidgets.QLabel('Math ')
+        self.lblMath.setStyleSheet("font-size: 14px; ")
+
+        self.lblMaxMath = QtWidgets.QLabel('Min : '+ str(df.min()[4]))
+        self.lblMaxMath.setStyleSheet("font-size: 12px; ")
+
+        self.lblMinMath = QtWidgets.QLabel('Max : '+ str(df.max()[4]))
+        self.lblMinMath.setStyleSheet("font-size: 12px; ")
+
+        self.lblAveMath = QtWidgets.QLabel('Average : '+ str(df.mean()[4]))
+        self.lblAveMath.setStyleSheet("font-size: 12px; ")
+
+        self.grdMath = QtWidgets.QGridLayout()
+        self.grdMath.setSpacing(4)
 
 
-        self.g
+        self.grdMath.addWidget(self.lblMath, 1, 0)
+        self.grdMath.addWidget(self.lblMaxMath, 2, 0)
+        self.grdMath.addWidget(self.lblMinMath, 3, 0)
+        self.grdMath.addWidget(self.lblAveMath, 4, 0)
+        self.grdMath.setMargin(20)
+
+        self.lblAl = QtWidgets.QLabel('Algebra  ')
+        self.lblAl.setStyleSheet("font-size: 14px; ")
+
+        self.lblMaxAl = QtWidgets.QLabel('Min : ' + str(df.min()[6]))
+        self.lblMaxAl.setStyleSheet("font-size: 12px; " )
+
+        self.lblMinAl  = QtWidgets.QLabel('Max : '+ str(df.max()[6]))
+        self.lblMinAl .setStyleSheet("font-size: 12px; ")
+
+        self.lblAveAl = QtWidgets.QLabel('Average :'+ str(df.mean()[6]))
+        self.lblAveAl.setStyleSheet("font-size: 12px; ")
+
+        self.grdAl = QtWidgets.QGridLayout()
+        self.grdAl.setSpacing(4)
 
 
+        self.grdAl.addWidget(self.lblAl, 1, 0)
+        self.grdAl.addWidget(self.lblMaxAl, 2, 0)
+        self.grdAl.addWidget(self.lblMinAl, 3, 0)
+        self.grdAl.addWidget(self.lblAveAl, 4, 0)
+        self.grdAl.setMargin(20)
 
-class ExportWindow(parent):
-    def __init__(self):
-        pass
+        self.lblSci = QtWidgets.QLabel('Science')
+        self.lblSci.setStyleSheet("font-size: 14px; ")
+
+        self.lblMaxSci = QtWidgets.QLabel('Min : '+ str(df.min()[5]))
+        self.lblMaxSci.setStyleSheet("font-size: 12px; ")
+
+        self.lblMinSci  = QtWidgets.QLabel('Max : '+ str(df.max()[5]))
+        self.lblMinSci .setStyleSheet("font-size: 12px; ")
+
+        self.lblAveSci = QtWidgets.QLabel('Average :'+ str(df.mean()[5]))
+        self.lblAveSci.setStyleSheet("font-size: 12px; ")
+
+        self.grdSci = QtWidgets.QGridLayout()
+        self.grdSci.setSpacing(4)
+
+
+        self.grdSci.addWidget(self.lblSci, 1, 0)
+        self.grdSci.addWidget(self.lblMaxSci, 2, 0)
+        self.grdSci.addWidget(self.lblMinSci, 3, 0)
+        self.grdSci.addWidget(self.lblAveSci, 4, 0)
+        self.grdSci.setMargin(20)
+
+        self.lblCmp = QtWidgets.QLabel('Computer  ')
+        self.lblCmp.setStyleSheet("font-size: 14px; ")
+
+        self.lblMaxCmp = QtWidgets.QLabel('Min : '+ str(df.min()[7]))
+        self.lblMaxCmp.setStyleSheet("font-size: 12px; ")
+
+        self.lblMinCmp  = QtWidgets.QLabel('Max : '+ str(df.max()[7]))
+        self.lblMinCmp .setStyleSheet("font-size: 12px; ")
+
+        self.lblAveCmp = QtWidgets.QLabel('Average :'+ str(df.mean()[7]))
+        self.lblAveCmp.setStyleSheet("font-size: 12px; ")
+
+        self.grdCmp = QtWidgets.QGridLayout()
+        self.grdCmp.setSpacing(4)
+
+
+        self.grdCmp.addWidget(self.lblCmp, 1, 0)
+        self.grdCmp.addWidget(self.lblMaxCmp, 2, 0)
+        self.grdCmp.addWidget(self.lblMinCmp, 3, 0)
+        self.grdCmp.addWidget(self.lblAveCmp, 4, 0)
+        self.grdCmp.setMargin(20)
+
+
+        self.grdBase = QtWidgets.QGridLayout()
+        self.grdBase.setSpacing(3)
+
+        self.grdBase.addLayout(self.grdMath, 1, 0)
+        self.grdBase.addLayout(self.grdAl, 1, 1)
+        self.grdBase.addLayout(self.grdSci, 2, 0)
+        self.grdBase.addLayout(self.grdCmp, 2, 1)
+
+        self.setLayout(self.grdBase)
+
 
 
 class MainWindow(parent):
@@ -331,18 +429,21 @@ class MainWindow(parent):
         self.btnViewStd.setIconSize(QtCore.QSize(120, 120))
         self.btnViewStd.clicked.connect(self.EditViewStd)
 
-        # self.btnInsertCourseScore = QtWidgets.QPushButton("  Export Data")
-        # self.btnInsertCourseScore.setIcon(QtGui.QPixmap('media/study.png'))
-        # self.btnInsertCourseScore.setIconSize(QtCore.QSize(120, 120))
+        self.btnExport = QtWidgets.QPushButton("  Export Data")
+        self.btnExport.setIcon(QtGui.QPixmap('media/study.png'))
+        self.btnExport.setIconSize(QtCore.QSize(120, 120))
+        self.btnExport.clicked.connect(self.ExportWindow)
 
-        # self.btnRepo = QtWidgets.QPushButton("  Report")
-        # self.btnRepo.setIcon(QtGui.QPixmap('media/maths.png'))
-        # self.btnRepo.setIconSize(QtCore.QSize(120, 120))
+
+        self.btnRepo = QtWidgets.QPushButton("  Report")
+        self.btnRepo.setIcon(QtGui.QPixmap('media/maths.png'))
+        self.btnRepo.setIconSize(QtCore.QSize(120, 120))
+        self.btnRepo.clicked.connect(self.RepotWindoCourse)
 
         self.grid.addWidget(self.btnNew, 1, 0)
         self.grid.addWidget(self.btnViewStd, 1, 1)
-        # self.grid.addWidget(self.btnInsertCourseScore, 2, 1)
-        # self.grid.addWidget(self.btnRepo, 2, 0)
+        self.grid.addWidget(self.btnExport, 2, 1)
+        self.grid.addWidget(self.btnRepo, 2, 0)
         self.setLayout(self.grid)
 
         
@@ -361,17 +462,37 @@ class MainWindow(parent):
         self.editStd.center()
         self.editStd.show()
 
-    def RepotWindo(self):
-        self.repoWindow = ReportWindow()
-        self.repoWindow.setFixedSize(200, 200)
-        self.repoWindow.center()
-        self.repoWindow.show()
+    def RepotWindoCourse(self):
+        if len(lstStudent)>0:
+            self.repoWindow = ReportWindow()
+            self.repoWindow.setFixedSize(300, 300)
+            self.repoWindow.center()
+            self.repoWindow.show()
+        else:
+            mb = QtWidgets.QMessageBox()
+            #mb.setIcon(mb.Icon.Error)
+            mb.setText("{0}".format('First Insert a Student'))
+            mb.setWindowTitle("Error")
+            mb.exec_() 
     
     def ExportWindow(self):
-        self.exportWindow = ExportWindow()
-        self.exportWindow.setFixedSize(200, 200)
-        self.exportWindow.center()
-        self.exportWindow.show()
+        # self.exportWindow = ExportWindow()
+        # self.exportWindow.setFixedSize(200, 200)
+        # self.exportWindow.center()
+        # self.exportWindow.show()
+        
+        fname = QtWidgets.QFileDialog.getSaveFileName(caption='Export File', options=QtWidgets.QFileDialog.DontUseNativeDialog, filter="csv file (*.csv)")
+        dictoFstudent = [list(vars(a).values()) for a in lstStudent]
+        df = pd.DataFrame(dictoFstudent)
+        if not os.path.isfile(fname[0]):
+            f = open(fname[0]+'.csv', 'x')
+            f.write(df.to_csv())
+            f.close()
+        else:
+            f = open(fname[0], 'w')
+            f.write(df.to_csv())
+            f.close()
+
 
 
 if __name__ == "__main__":
