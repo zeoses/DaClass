@@ -8,3 +8,4 @@ run `python GSR.py` and enjoy it.
 ### Important packages used 
 * pandas : For data handling
 * PySide2 : core of Qt (for GUI handling)
+
