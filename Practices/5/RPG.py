@@ -87,6 +87,7 @@ class Fox():
         self.HP = 10 
         self.level = 1 
         self.DP = 3
+        self.exirCost =3
     
     def levelUp(self):
         self.level += 1
@@ -95,7 +96,8 @@ class Fox():
     
     def ‌‌BuyElixir():
         self.HP += 3
-        return 3
+        self.DP +=1
+        
 
 class Snak():
     def __init__(self, type):
