@@ -74,8 +74,8 @@ or
 * view : the logic of Task
 * Template : view or object can see user
 
-## 
-
+## TIME ZONE
+TIME_ZONE = 'Asia/Tehran'
 
 
 # useful links 
